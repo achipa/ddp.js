@@ -1,0 +1,1623 @@
+<!DOCTYPE html><html><head><meta charset="utf8"><style type="text/css" media="screen">html {
+	font-size: 66.67%;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	tab-size: 4;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	margin-right: 28vw;
+	line-height: 1.6;
+}
+
+div.body {
+	height: 100vh;
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+h1 {
+	font-size: 4em;
+	font-weight: 100;
+	padding-bottom: 0.4em;
+	border-bottom: solid #CCC 1px;
+	margin-bottom: 0.4em;
+	color: #555;
+}
+
+aside {
+	position: fixed;
+	width: 28vw;
+	right: 0px;
+	top: 0px;
+	background-color: #333;
+	height: 100vh;
+	box-shadow: rgba(0,0,0,0.5) -1px 0px 0px;
+	overflow-y: scroll;
+}
+
+aside ul, aside li {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+aside li {
+	box-shadow: inset rgba(0,0,0,0.5) 1px 0px 0px;
+}
+
+aside a {
+	display: block;
+	line-height: 1.4;
+	font-size: 1.2em;
+	text-decoration: none;
+	border-bottom: solid #222 1px;
+	border-top: solid #444 1px;
+	border-left: solid 3px black;
+	padding: 2.5em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	overflow: hidden;
+	color: #666;
+	position: relative;
+}
+
+aside a:hover {
+	color: white;
+	background-color: #363636;
+}
+
+aside a {
+	text-overflow: break-word;
+}
+
+aside a span.coverage {
+	background-color: #2e2e2e;
+	border-right: solid #3a3a3a 1px;
+	color: black;
+	display: inline-block;
+	font-weight: bold;
+	min-width: 2em;
+	padding: 0.3em;
+	text-align: center;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+}
+
+aside li.perfect a {
+	border-left-color: hsl(125, 100%, 70%);
+}
+
+aside li.great a {
+	border-left-color: hsl(115, 100%, 70%);
+}
+
+aside li.good a {
+	border-left-color: hsl(100, 100%, 70%);
+}
+
+aside li.average a {
+	border-left-color: hsl(80, 100%, 70%);
+}
+
+aside li.poor a {
+	border-left-color: hsl(60, 100%, 70%);
+}
+
+aside li.worse a {
+	border-left-color: hsl(40, 100%, 70%);
+}
+
+aside li.abysmal a {
+	border-left-color: hsl(20, 100%, 70%);
+}
+
+aside li.you-should-be-ashamed a {
+	border-left-color: hsl(0, 100%, 70%);
+}
+
+aside li.perfect span.coverage {
+	color: hsl(125, 100%, 70%);
+}
+
+aside li.great span.coverage {
+	color: hsl(115, 100%, 70%);
+}
+
+aside li.good span.coverage {
+	color: hsl(100, 100%, 70%);
+}
+
+aside li.average span.coverage {
+	color: hsl(80, 100%, 70%);
+}
+
+aside li.poor span.coverage {
+	color: hsl(60, 100%, 70%);
+}
+
+aside li.worse span.coverage {
+	color: hsl(40, 100%, 70%);
+}
+
+aside li.abysmal span.coverage {
+	color: hsl(20, 100%, 70%);
+}
+
+aside li.you-should-be-ashamed span.coverage {
+	color: hsl(0, 100%, 70%);
+}
+
+
+header.docHeader {
+	padding: 2em;
+}
+
+div.file {
+	margin: 1em;
+	padding: 1em;
+	background-color: #F6F6F6;
+}
+
+div.file header {
+	border-bottom: dashed #CCC 1px;
+}
+
+pre {
+	background-color: white;
+	font-size: 1.2em;
+	font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace;
+	padding: 1em;
+}
+
+table {
+	border-collapse: collapse;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	color: #666;
+}
+
+th, td {
+	text-align: left;
+	min-width: 50px;
+	font-size: 1.1em;
+	line-height: 1.7em;
+	padding-right: 1em;
+}
+
+.token {
+	-webkit-transition: background-color linear 250ms;
+	transition: background-color linear 250ms;
+}
+
+li a {
+	-webkit-transition: border-color linear 250ms;
+	transition: border-color linear 250ms
+}
+
+/* Tokens */
+.evaluated.perfect > .token, .key-item.perfect {
+	background-color: hsl(125, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.evaluated.great > .token, .key-item.great {
+	background-color: hsl(115, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.evaluated.good > .token, .key-item.good {
+	background-color: hsl(100, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.evaluated.average > .token, .key-item.average {
+	background-color: hsl(80, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.evaluated.poor > .token, .key-item.poor {
+	background-color: hsl(60, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.evaluated.worse > .token, .key-item.worse {
+	background-color: hsl(40, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.evaluated.abysmal > .token, .key-item.abysmal {
+	background-color: hsl(20, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.evaluated.you-should-be-ashamed > .token, .key-item.you-should-be-ashamed {
+	background-color: hsl(0, 100%, 70%);
+	color: black;
+	font-weight: normal;
+}
+
+.unevaluated > .token, .key-item.unevaluated {
+	background-color: #CCC;
+	color: red;
+	font-weight: bold;
+}
+
+.AssignmentExpression > .token, .AssignmentExpression > * > .token {
+	border-bottom: solid #AAF 2px;
+}
+
+.CallExpression > .token, .CallExpression > * > .token {
+	border-bottom: solid #AFA 2px;
+}
+
+#guide {
+	border: solid #ddd 1px;
+	margin: 0px;
+	margin-left: -1em;
+	margin-right: -1em;
+	padding: 1em;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+#guide h3, #guide p {
+	clear: both;
+	margin-bottom: 0.5em;
+}
+
+#guide p {
+	font-size: 1.1em;
+}
+
+#guide .key-item {
+	display: block;
+	padding: 1em;
+	float: left;
+	box-shadow:	inset rgba(0,0,0,0.2) 0px 1px 0px,
+				inset rgba(0,0,0,0.2) -1px -1px 0px;
+}</style></head><body><aside class="sidebar"><nav><ul><li data-coverage='26.18' class="file"><a href="#8eab68cd8429b9f694656d4b81569747"><span class="coverage">26</span><span class="filename">ddp.js</span></a></li></ul></nav></aside><div class="body"><header class="docHeader"><h1>Coverage Report</h1><table class="statRundown"><thead><tr><th>Kind</th><th>Covered</th><th>Total</th><th>Percentage</th></tr></thead><tbody><tr><th>lines</th><td>38</td><td>211</td><td>18%</td></tr><tr><th>conditions</th><td>10</td><td>98</td><td>10.2%</td></tr><tr><th>expressions</th><td>72</td><td>275</td><td>26.18%</td></tr><tr><th>functions</th><td>71</td><td>274</td><td>25.91%</td></tr></tbody></table><div id="guide"><h3>Key</h3><p>SteamShovel uses the stack depth to determine how
+directly code was tested. Code which was not tested
+directly is not considered highly in the coverage
+output.</p></div></header><main><div id="8eab68cd8429b9f694656d4b81569747" class="file"><header class="fileHeader"><h2>ddp.js</h2><table class="statRundown"><thead><tr><th>Kind</th><th>Covered</th><th>Total</th><th>Percentage</th></tr></thead><tbody><tr><th>lines</th><td>38</td><td>211</td><td>18%</td></tr><tr><th>conditions</th><td>10</td><td>98</td><td>10.2%</td></tr><tr><th>expressions</th><td>72</td><td>275</td><td>26.18%</td></tr><tr><th>functions</th><td>71</td><td>274</td><td>25.91%</td></tr></tbody></table></header><pre><span class="token"></span><span
+	class="item CallExpression
+	evaluated depth20"
+	data-score="1"
+	data-depth="20"
+	data-type="CallExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">(</span><span
+	class="item FunctionExpression
+	evaluated depth20"
+	data-score="1"
+	data-depth="20"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">function</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+
+    </span><span class="token">&quot;use</span><span class="token"> </span><span class="token">strict&quot;;</span><span class="whitespace">
+
+    </span><span class="token">var</span><span class="token"> </span><span class="token">uniqueId</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="CallExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">(</span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">i</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">0;</span><span class="whitespace">
+        </span><span class="token">return</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth22"
+	data-score="1"
+	data-depth="22"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+            </span><span class="token">return</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">(</span><span class="token">i++).toString();</span><span class="whitespace">
+        </span><span class="token">};</span><span class="whitespace">
+    </span><span class="token">})();</span><span class="whitespace">
+
+	</span><span class="token">var</span><span class="token"> </span><span class="token">shimUnderscore</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+		</span><span class="token">var</span><span class="token"> </span><span class="token">_</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item ObjectExpression
+	evaluated depth22"
+	data-score="1"
+	data-depth="22"
+	data-type="ObjectExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">{</span><span class="token">};</span><span class="whitespace">
+		</span><span
+	class="item AssignmentExpression
+	evaluated depth22"
+	data-score="1"
+	data-depth="22"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">_</span><span class="token">.forEach</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth22"
+	data-score="1"
+	data-depth="22"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction(obj,</span><span class="token"> </span><span class="token">iterator,</span><span class="token"> </span><span class="token">context)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span class="token">var</span><span class="token"> </span><span class="token">nativeForEach</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">A</span><span class="token">rray.prototype.forEach;</span><span class="whitespace">
+			</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item Identifier
+	unevaluated"><span class="token"></span><span
+	class="item LogicalExpression
+	unevaluated"><span class="token">nativeForEach</span><span class="token"> </span><span class="token">&amp;&amp;</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token"></span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token">o</span><span class="token">bj.forEach</span><span class="token"> </span><span class="token">===</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">n</span><span class="token">ativeForEach)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+				</span><span class="token">return</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">o</span><span class="token">bj.forEach(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">iterator,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">c</span><span class="token">ontext);</span><span class="whitespace">
+			</span><span class="token">}</span><span class="whitespace">
+			</span><span class="token">throw</span><span class="token"> </span><span
+	class="item NewExpression
+	unevaluated"><span class="token">n</span><span class="token">ew</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">E</span><span class="token">rror(&quot;Unsupported</span><span class="token"> </span><span class="token">browser.</span><span class="token"> </span><span class="token">Include</span><span class="token"> </span><span class="token">underscore.js</span><span class="token"> </span><span class="token">for</span><span class="token"> </span><span class="token">compatibility.&quot;);</span><span class="whitespace">
+		</span><span class="token">};</span><span class="whitespace"> 
+		</span><span
+	class="item AssignmentExpression
+	evaluated depth22"
+	data-score="1"
+	data-depth="22"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">_</span><span class="token">.bind</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth22"
+	data-score="1"
+	data-depth="22"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction(func,</span><span class="token"> </span><span class="token">context)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span class="token">var</span><span class="token"> </span><span class="token">nativeBind</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">F</span><span class="token">unction.prototype.bind;</span><span class="whitespace">
+			</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item LogicalExpression
+	unevaluated"><span class="token"></span><span
+	class="item Identifier
+	unevaluated"><span class="token">nativeBind</span><span class="token"> </span><span class="token">&amp;&amp;</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token"></span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token">f</span><span class="token">unc.bind</span><span class="token"> </span><span class="token">===</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">n</span><span class="token">ativeBind)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+				</span><span class="token">return</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">n</span><span class="token">ativeBind.apply(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">func,</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">A</span><span class="token">rray.prototype.slice.call(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">arguments,</span><span class="token"> </span><span class="token">1));</span><span class="whitespace">
+			</span><span class="token">}</span><span class="whitespace">
+			</span><span class="token">throw</span><span class="token"> </span><span
+	class="item NewExpression
+	unevaluated"><span class="token">n</span><span class="token">ew</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">E</span><span class="token">rror(&quot;Unsupported</span><span class="token"> </span><span class="token">browser.</span><span class="token"> </span><span class="token">Include</span><span class="token"> </span><span class="token">underscore.js</span><span class="token"> </span><span class="token">for</span><span class="token"> </span><span class="token">compatibility.&quot;);</span><span class="whitespace">
+		</span><span class="token">};</span><span class="whitespace">
+		</span><span class="token">return</span><span class="token"> </span><span
+	class="item Identifier
+	evaluated depth22"
+	data-score="1"
+	data-depth="22"
+	data-type="Identifier"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">_</span><span class="token">;</span><span class="whitespace">
+	</span><span class="token">};</span><span class="whitespace">
+	</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item UnaryExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="UnaryExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token"></span><span
+	class="item BinaryExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="BinaryExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">typeof</span><span class="token"> </span><span class="token">_</span><span class="token"> </span><span class="token">===</span><span class="token"> </span><span class="token">&quot;undefined&quot;)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+		</span><span class="token">var</span><span class="token"> </span><span class="token">_</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="CallExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token"></span><span
+	class="item Identifier
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="Identifier"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">s</span><span class="token">himUnderscore();</span><span class="whitespace">
+	</span><span class="token">}</span><span class="whitespace">
+
+    </span><span class="token">var</span><span class="token"> </span><span class="token">INIT_DDP_MESSAGE</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">&quot;{\&quot;server_id\&quot;:\&quot;0\&quot;}&quot;;</span><span class="whitespace">
+    </span><span class="token">var</span><span class="token"> </span><span class="token">MAX_RECONNECT_ATTEMPTS</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">10;</span><span class="whitespace">
+    </span><span class="token">var</span><span class="token"> </span><span class="token">TIMER_INCREMENT</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">500;</span><span class="whitespace">
+	</span><span class="token">var</span><span class="token"> </span><span class="token">DDP_SERVER_MESSAGES</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item ArrayExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="ArrayExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="whitespace">[
+		</span><span class="token">&quot;added&quot;,</span><span class="token"> </span><span class="token">&quot;changed&quot;,</span><span class="token"> </span><span class="token">&quot;connected&quot;,</span><span class="token"> </span><span class="token">&quot;error&quot;,</span><span class="token"> </span><span class="token">&quot;failed&quot;,</span><span class="whitespace">
+		</span><span class="token">&quot;nosub&quot;,</span><span class="token"> </span><span class="token">&quot;ready&quot;,</span><span class="token"> </span><span class="token">&quot;removed&quot;,</span><span class="token"> </span><span class="token">&quot;result&quot;,</span><span class="token"> </span><span class="token">&quot;updated&quot;</span><span class="whitespace">
+	</span><span class="token">];</span><span class="whitespace">
+
+    </span><span class="token">var</span><span class="token"> </span><span class="token">DDP</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(options)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._endpoint</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">o</span><span class="token">ptions.endpoint;</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._SocketConstructor</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">o</span><span class="token">ptions.SocketConstructor;</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._autoreconnect</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">!</span><span class="token">options.do_not_autoreconnect;</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onReadyCallbacks</span><span class="whitespace">   </span><span class="token">=</span><span class="token"> </span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="token">};</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onResultCallbacks</span><span class="whitespace">  </span><span class="token">=</span><span class="token"> </span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="token">};</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onUpdatedCallbacks</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="token">};</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._events</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="token">};</span><span class="whitespace">
+		</span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_count</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">0;</span><span class="whitespace">
+		</span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_incremental_timer</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">0;</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">!options.do_not_autoconnect)</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his.connect();</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype.constructor</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item Identifier
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="Identifier"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP;</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype.connect</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._socket</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item NewExpression
+	unevaluated"><span class="token">n</span><span class="token">ew</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">t</span><span class="token">his._SocketConstructor(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._endpoint);</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._socket.onopen</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_</span><span class="token">.bind(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._on_socket_open,</span><span class="token"> </span><span class="token">this);</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._socket.onmessage</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_</span><span class="token">.bind(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._on_socket_message,</span><span class="token"> </span><span class="token">this);</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._socket.onerror</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_</span><span class="token">.bind(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._on_socket_error,</span><span class="token"> </span><span class="token">this);</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._socket.onclose</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_</span><span class="token">.bind(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._on_socket_close,</span><span class="token"> </span><span class="token">this);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype.method</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(name,</span><span class="token"> </span><span class="token">params,</span><span class="token"> </span><span class="token">onResult,</span><span class="token"> </span><span class="token">onUpdated)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">id</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token"></span><span
+	class="item Identifier
+	unevaluated"><span class="token">u</span><span class="token">niqueId();</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onResultCallbacks[id]</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">o</span><span class="token">nResult;</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onUpdatedCallbacks[id]</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">o</span><span class="token">nUpdated;</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._send(</span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="whitespace">
+            </span><span class="token">msg:</span><span class="token"> </span><span class="token">&quot;method&quot;,</span><span class="whitespace">
+            </span><span class="token">id:</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">i</span><span class="token">d,</span><span class="whitespace">
+            </span><span class="token">method:</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">n</span><span class="token">ame,</span><span class="whitespace">
+            </span><span class="token">params:</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">p</span><span class="token">arams</span><span class="whitespace">
+        </span><span class="token">});</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype.sub</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(name,</span><span class="token"> </span><span class="token">params,</span><span class="token"> </span><span class="token">onReady)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">id</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token"></span><span
+	class="item Identifier
+	unevaluated"><span class="token">u</span><span class="token">niqueId();</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onReadyCallbacks[id]</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">o</span><span class="token">nReady;</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._send(</span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="whitespace">
+            </span><span class="token">msg:</span><span class="token"> </span><span class="token">&quot;sub&quot;,</span><span class="whitespace">
+            </span><span class="token">id:</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">i</span><span class="token">d,</span><span class="whitespace">
+            </span><span class="token">name:</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">n</span><span class="token">ame,</span><span class="whitespace">
+            </span><span class="token">params:</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">p</span><span class="token">arams</span><span class="whitespace">
+        </span><span class="token">});</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype.unsub</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(id)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._send(</span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="whitespace">
+            </span><span class="token">msg:</span><span class="token"> </span><span class="token">&quot;unsub&quot;,</span><span class="whitespace">
+            </span><span class="token">id:</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">i</span><span class="token">d</span><span class="whitespace">
+        </span><span class="token">});</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype.on</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(name,</span><span class="token"> </span><span class="token">handler)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._events[name]</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item LogicalExpression
+	unevaluated"><span class="token"></span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">t</span><span class="token">his._events[name]</span><span class="token"> </span><span class="token">||</span><span class="token"> </span><span
+	class="item ArrayExpression
+	unevaluated"><span class="token">[</span><span class="token">];</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._events[name].push(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">handler);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype.off</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(name,</span><span class="token"> </span><span class="token">handler)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">!this._events[name])</span><span class="token"> </span><span class="token">return;</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._events[name].splice(</span><span
+	class="item CallExpression
+	unevaluated"><span class="token">this._events[name].indexOf(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">handler),</span><span class="token"> </span><span class="token">1);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._emit</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(name</span><span class="token"> </span><span class="token">/*</span><span class="token"> </span><span class="token">,</span><span class="token"> </span><span class="token">arguments</span><span class="token"> </span><span class="token">*/)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">!this._events[name])</span><span class="token"> </span><span class="token">return;</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">args</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">a</span><span class="token">rguments;</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">self</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">this;</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_</span><span class="token">.forEach(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._events[name],</span><span class="token"> </span><span
+	class="item FunctionExpression
+	unevaluated"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(handler)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+            </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">h</span><span class="token">andler.apply(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">self,</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">A</span><span class="token">rray.prototype.slice.call(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">args,</span><span class="token"> </span><span class="token">1));</span><span class="whitespace">
+        </span><span class="token">});</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._send</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(object)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">message;</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token"></span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">typeof</span><span class="token"> </span><span class="token">EJSON</span><span class="token"> </span><span class="token">===</span><span class="token"> </span><span class="token">&quot;undefined&quot;)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+            </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">m</span><span class="token">essage</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">J</span><span class="token">SON.stringify(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">object);</span><span class="whitespace">
+        </span><span class="token">}</span><span class="token"> </span><span class="token">else</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+            </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">m</span><span class="token">essage</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">E</span><span class="token">JSON.stringify(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">object);</span><span class="whitespace">
+        </span><span class="token">}</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._socket.send(</span><span
+	class="item Identifier
+	unevaluated"><span class="token">message);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._try_reconnect</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token"></span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._reconnect_count</span><span class="token"> </span><span class="token">&lt;</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">M</span><span class="token">AX_RECONNECT_ATTEMPTS)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+            </span><span
+	class="item CallExpression
+	unevaluated"><span class="token"></span><span
+	class="item Identifier
+	unevaluated"><span class="token">s</span><span class="token">etTimeout(</span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_.bind(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this.connect,</span><span class="token"> </span><span class="token">this),</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_incremental_timer);</span><span class="whitespace">
+        </span><span class="token">}</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_count</span><span class="token"> </span><span class="token">+=</span><span class="token"> </span><span class="token">1;</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_incremental_timer</span><span class="token"> </span><span class="token">+=</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token"></span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token">T</span><span class="token">IMER_INCREMENT</span><span class="token"> </span><span class="token">*</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_count;</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_result</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+		</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._onResultCallbacks[data.id])</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onResultCallbacks[data.id](</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.error,</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">d</span><span class="token">ata.result);</span><span class="whitespace">
+			</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">d</span><span class="token">elete</span><span class="token"> </span><span class="token">this._onResultCallbacks[data.id];</span><span class="whitespace">
+			</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.error)</span><span class="token"> </span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">d</span><span class="token">elete</span><span class="token"> </span><span class="token">this._onUpdatedCallbacks[data.id];</span><span class="whitespace">
+		</span><span class="token">}</span><span class="token"> </span><span class="token">else</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.error)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+				</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">d</span><span class="token">elete</span><span class="token"> </span><span class="token">this._onUpdatedCallbacks[data.id];</span><span class="whitespace">
+				</span><span class="token">throw</span><span class="token"> </span><span
+	class="item NewExpression
+	unevaluated"><span class="token">n</span><span class="token">ew</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">E</span><span class="token">rror(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.error);</span><span class="whitespace">
+			</span><span class="token">}</span><span class="whitespace">
+		</span><span class="token">}</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_updated</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">self</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">this;</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_</span><span class="token">.forEach(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.methods,</span><span class="token"> </span><span
+	class="item FunctionExpression
+	unevaluated"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(id)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">self._onUpdatedCallbacks[id])</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+				</span><span
+	class="item CallExpression
+	unevaluated"><span class="token">s</span><span class="token">elf._onUpdatedCallbacks[id]();</span><span class="whitespace">
+				</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">d</span><span class="token">elete</span><span class="token"> </span><span class="token">self._onUpdatedCallbacks[id];</span><span class="whitespace">
+			</span><span class="token">}</span><span class="whitespace">
+        </span><span class="token">});</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_nosub</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+		</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._onReadyCallbacks[data.id])</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._onReadyCallbacks[data.id](</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.error);</span><span class="whitespace">
+			</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">d</span><span class="token">elete</span><span class="token"> </span><span class="token">this._onReadyCallbacks[data.id];</span><span class="whitespace">
+		</span><span class="token">}</span><span class="token"> </span><span class="token">else</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span class="token">throw</span><span class="token"> </span><span
+	class="item NewExpression
+	unevaluated"><span class="token">n</span><span class="token">ew</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">E</span><span class="token">rror(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.error);</span><span class="whitespace">
+		</span><span class="token">}</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_ready</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">self</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">this;</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">_</span><span class="token">.forEach(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.subs,</span><span class="token"> </span><span
+	class="item FunctionExpression
+	unevaluated"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(id)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+			</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">self._onReadyCallbacks[id])</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+				</span><span
+	class="item CallExpression
+	unevaluated"><span class="token">s</span><span class="token">elf._onReadyCallbacks[id]();</span><span class="whitespace">
+				</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">d</span><span class="token">elete</span><span class="token"> </span><span class="token">self._onReadyCallbacks[id];</span><span class="whitespace">
+			</span><span class="token">}</span><span class="whitespace">
+		</span><span class="token">});</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_error</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;error&quot;,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">d</span><span class="token">ata);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_connected</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_count</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">0;</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">t</span><span class="token">his._reconnect_incremental_timer</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span class="token">0;</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;connected&quot;,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">d</span><span class="token">ata);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_failed</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;failed&quot;,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">d</span><span class="token">ata);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_added</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;added&quot;,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">d</span><span class="token">ata);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_removed</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;removed&quot;,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">d</span><span class="token">ata);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_changed</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(data)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;changed&quot;,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">d</span><span class="token">ata);</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_socket_close</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;socket_close&quot;);</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._autoreconnect)</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._try_reconnect();</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_socket_error</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(e)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._emit(&quot;socket_error&quot;,</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">e</span><span class="token">);</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">this._autoreconnect)</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._try_reconnect();</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_socket_open</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">()</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his._send(</span><span
+	class="item ObjectExpression
+	unevaluated"><span class="token">{</span><span class="whitespace">
+            </span><span class="token">msg:</span><span class="token"> </span><span class="token">&quot;connect&quot;,</span><span class="whitespace">
+            </span><span class="token">version:</span><span class="token"> </span><span class="token">&quot;pre1&quot;,</span><span class="whitespace">
+            </span><span class="token">support:</span><span class="token"> </span><span
+	class="item ArrayExpression
+	unevaluated"><span class="token">[</span><span class="token">&quot;pre1&quot;]</span><span class="whitespace">
+        </span><span class="token">});</span><span class="whitespace">
+    </span><span class="token">};</span><span class="whitespace">
+    </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP.prototype._on_socket_message</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item FunctionExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="FunctionExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">f</span><span class="token">unction</span><span class="token"> </span><span class="token">(message)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span class="token">var</span><span class="token"> </span><span class="token">data;</span><span class="whitespace">
+        </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token"></span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">message.data</span><span class="token"> </span><span class="token">===</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">I</span><span class="token">NIT_DDP_MESSAGE)</span><span class="token"> </span><span class="token">return;</span><span class="whitespace">
+        </span><span class="token">try</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+            </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token"></span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token">typeof</span><span class="token"> </span><span class="token">EJSON</span><span class="token"> </span><span class="token">===</span><span class="token"> </span><span class="token">&quot;undefined&quot;)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+                </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">d</span><span class="token">ata</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">J</span><span class="token">SON.parse(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">message.data);</span><span class="whitespace">
+            </span><span class="token">}</span><span class="token"> </span><span class="token">else</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+                </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">d</span><span class="token">ata</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">E</span><span class="token">JSON.parse(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">message.data);</span><span class="whitespace">
+            </span><span class="token">}</span><span class="whitespace">
+			</span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item CallExpression
+	unevaluated"><span class="token"></span><span
+	class="item BinaryExpression
+	unevaluated"><span class="token">DDP_SERVER_MESSAGES.indexOf(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">data.msg)</span><span class="token"> </span><span class="token">===</span><span class="token"> </span><span
+	class="item UnaryExpression
+	unevaluated"><span class="token">-</span><span class="token">1)</span><span class="token"> </span><span class="token">throw</span><span class="token"> </span><span
+	class="item NewExpression
+	unevaluated"><span class="token">n</span><span class="token">ew</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">E</span><span class="token">rror();</span><span class="whitespace">
+        </span><span class="token">}</span><span class="token"> </span><span class="token">catch</span><span class="token"> </span><span class="token">(e)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+            </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">c</span><span class="token">onsole.warn(&quot;Non</span><span class="token"> </span><span class="token">DDP</span><span class="token"> </span><span class="token">message</span><span class="token"> </span><span class="token">received:&quot;);</span><span class="whitespace">
+            </span><span
+	class="item CallExpression
+	unevaluated"><span class="token">c</span><span class="token">onsole.warn(</span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">message.data);</span><span class="whitespace">
+			</span><span class="token">return;</span><span class="whitespace">
+		</span><span class="token">}</span><span class="whitespace">
+		</span><span
+	class="item CallExpression
+	unevaluated"><span class="token">t</span><span class="token">his[&quot;_on_&quot;</span><span class="token"> </span><span class="token">+</span><span class="token"> </span><span
+	class="item MemberExpression
+	unevaluated"><span class="token">d</span><span class="token">ata.msg](</span><span
+	class="item Identifier
+	unevaluated"><span class="token">data);</span><span class="whitespace">
+	</span><span class="token">};</span><span class="whitespace">
+
+    </span><span class="token">if</span><span class="token"> </span><span class="token">(</span><span
+	class="item UnaryExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="UnaryExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token"></span><span
+	class="item LogicalExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="LogicalExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token"></span><span
+	class="item BinaryExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="BinaryExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">typeof</span><span class="token"> </span><span class="token">module</span><span class="token"> </span><span class="token">!==</span><span class="token"> </span><span class="token">&quot;undefined&quot;</span><span class="token"> </span><span class="token">&amp;&amp;</span><span class="token"> </span><span
+	class="item MemberExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="MemberExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">m</span><span class="token">odule.exports)</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="AssignmentExpression"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">m</span><span class="token">odule.exports</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item Identifier
+	evaluated depth21"
+	data-score="1"
+	data-depth="21"
+	data-type="Identifier"
+	data-rss="4997120"
+	data-heapused="888952"
+data-heaptotal="6258176"><span class="token">D</span><span class="token">DP;</span><span class="whitespace">
+    </span><span class="token">}</span><span class="token"> </span><span class="token">else</span><span class="token"> </span><span class="token">{</span><span class="whitespace">
+        </span><span
+	class="item AssignmentExpression
+	unevaluated"><span class="token">w</span><span class="token">indow.DDP</span><span class="token"> </span><span class="token">=</span><span class="token"> </span><span
+	class="item Identifier
+	unevaluated"><span class="token">D</span><span class="token">DP;</span><span class="whitespace">
+    </span><span class="token">}</span><span class="whitespace">
+
+</span><span class="token">})();</span></span><span class="token">
+</span></pre></div></main></div><script>(function() {
+	window.addEventListener("load", function() {
+
+		var $ = function() {
+			return [].slice.call(
+				document.querySelectorAll.apply(document, arguments));
+		};
+
+		var scoreClasses = [
+			"perfect",
+			"great",
+			"good",
+			"average",
+			"poor",
+			"worse",
+			"abysmal",
+			"you-should-be-ashamed"
+		].reverse();
+
+		var key = document.createElement("div");
+
+		scoreClasses.concat(["unevaluated"]).forEach(function(className) {
+			var keyItem = document.createElement("span");
+				keyItem.classList.add("key-item");
+				keyItem.classList.add(className);
+
+			keyItem.appendChild(document.createTextNode(
+				className[0].toUpperCase() +
+				className.substr(1)
+			));
+
+			key.appendChild(keyItem);
+		});
+
+		document.querySelector("#guide")
+			.appendChild(key);
+
+		$(".evaluated")
+			.sort(function(a, b) {
+				return	parseFloat(a.dataset.heapused) -
+						parseFloat(b.dataset.heapused);
+			})
+			.forEach(function(item, index, array) {
+				var score = (item.dataset.score) * (scoreClasses.length-1) | 0,
+					scoreClass = scoreClasses[score];
+
+				var perc = (array.length - index) / array.length;
+					perc = (perc * 10000) / 10000;
+
+				item.classList.add(scoreClass);
+
+				item.title = (
+					scoreClass[0].toUpperCase() +
+					scoreClass.substr(1) +
+					" code coverage.\n" +
+					"[" + item.dataset.type + "]\n" +
+					"Depth: " + item.dataset.depth + "\n" +
+					"Score: " + item.dataset.score + "\n" +
+					"Mem|RSS: "+ item.dataset.rss + "\n" +
+					"Mem|HeapTotal: "+ item.dataset.heaptotal + "\n" +
+					"Mem|HeapUsed: "+ item.dataset.heapused
+				);
+
+				[].slice.call(item.childNodes).forEach(function(item) {
+					if (!item.classList.contains("token")) return;
+
+					item.style.borderBottom =
+						"solid rgba(0,0,0," + perc + ") 5px";
+				});
+
+				item.addEventListener("click", showtooltip.bind(item));
+			});
+
+		$(".unevaluated")
+			.forEach(function(item) {
+				item.title = "WARNING: This code was never evaluated.";
+			});
+
+		$("li.file")
+			.forEach(function(item) {
+				var score = (
+						(item.dataset.coverage / 100) *
+						(scoreClasses.length - 1) | 0),
+					scoreClass = scoreClasses[score];
+
+				item.classList.add(scoreClass);
+			});
+
+		var tooltip
+
+		function showtooltip() {
+			if (!tooltip) {
+				tooltip = document.createElement("div");
+				tooltip.classList.add("tooltip");
+
+				tooltip.hide = function() {
+					tooltip.style.display = "hidden";
+				};
+
+				tooltip.show = function() {
+					tooltip.style.display = "block";
+				};
+
+				tooltip.header = document.createElement("h3");
+				tooltip.dataTable = document.createElement("table")
+
+				tooltip.appendChild(header);
+				tooltip.appendChild(dataTable);
+				document.appendChild(tooltip);
+			}
+		}
+
+	}, false);
+})();</script></body></html>
