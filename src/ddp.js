@@ -1,8 +1,12 @@
+var DDP;
+// hack... err... workaround around the lack of globals in QML JS
 (function (root, factory) {
 	if (typeof define === "function" && define.amd) {
 		define(factory);
 	} else if (typeof exports === "object") {
 		module.exports = factory();
+    } else if (Qt !== undefined) {
+        DDP = factory();
 	} else {
 		root.DDP = factory();
 	}
@@ -58,12 +62,14 @@
 	DDP.prototype.constructor = DDP;
 
 	DDP.prototype.connect = function () {
-		this.readyState = 0;
-		this._socket = new this._SocketConstructor(this._endpoint);
-		this._socket.onopen = this._on_socket_open.bind(this);
-		this._socket.onmessage = this._on_socket_message.bind(this);
-		this._socket.onerror = this._on_socket_error.bind(this);
-		this._socket.onclose = this._on_socket_close.bind(this);
+        this.readyState = 0;
+        this._socket = this._SocketConstructor;
+        this._socket.url = this._endpoint;
+        this._socket.textMessageReceived.connect(this._on_socket_message.bind(this))
+        this._socket.onOpen.connect(this._on_socket_open.bind(this));
+        this._socket.onError.connect(this._on_socket_error.bind(this));
+        this._socket.onClose.connect(this._on_socket_close.bind(this));
+
 	};
 
 	DDP.prototype.method = function (name, params, onResult, onUpdated) {
@@ -145,16 +151,16 @@
 				timestamp: Date.now()
 			});
 		}
-		this._socket.send(message);
+        this._socket.sendTextMessage(message);
 	};
 
 	DDP.prototype._try_reconnect = function () {
 		if (this._reconnect_count < RECONNECT_ATTEMPTS_BEFORE_PLATEAU) {
-			setTimeout(this.connect.bind(this), this._reconnect_incremental_timer);
+            this._socket.setTimeout(this.connect.bind(this), this._reconnect_incremental_timer);
 			this._reconnect_count += 1;
 			this._reconnect_incremental_timer += TIMER_INCREMENT * this._reconnect_count;
 		} else {
-			setTimeout(this.connect.bind(this), this._reconnect_incremental_timer);
+            this._socket.setTimeout(this.connect.bind(this), this._reconnect_incremental_timer);
 		}
 	};
 
@@ -227,7 +233,7 @@
 		}
 		self._emit(eventName, data);
 		// Set up keepalive ping-s
-		self._ping_interval_handle = setInterval(function () {
+        self._ping_interval_handle = this._socket.setInterval(function () {
 			var id = uniqueId();
 			self._send({
 				msg: "ping",
@@ -266,7 +272,7 @@
 				timestamp: Date.now()
 			});
 		}
-		clearInterval(this._ping_interval_handle);
+        this._socket.clearInterval(this._ping_interval_handle);
 		this.readyState = 4;
 		this._emit("socket_close");
 		if (this._autoreconnect) {
@@ -281,7 +287,7 @@
 				timestamp: Date.now()
 			});
 		}
-		clearInterval(this._ping_interval_handle);
+        this._socket.clearInterval(this._ping_interval_handle);
 		this.readyState = 4;
 		this._emit("socket_error", e);
 	};
@@ -298,7 +304,8 @@
 			support: [DDP_VERSION]
 		});
 	};
-	DDP.prototype._on_socket_message = function (message) {
+    DDP.prototype._on_socket_message = function (wsmessage) {
+        var message = { data: wsmessage };
 		if (this._socketInterceptFunction) {
 			this._socketInterceptFunction({
 				type: "socket_message_received",
